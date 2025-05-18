@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Booking - WINAROSA HOTEL</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #193977;
+        }
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            color: #facc15;
+        }
+        .booking-section {
+            padding: 6rem 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .booking-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .btn {
+            background-color: #facc15;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #eab308;
+        }
+        footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">winarosa</h1>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+                <a href="/login" class="btn">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Booking Section -->
+     <form method="POST"action="booking_process.php">
+    <section class="booking-section">  
+        <h2 class="text-3xl font-bold mb-8">Book Your Stay</h2>
+        <div class="booking-form">
+            <div class="form-group">
+                <label for="check-in">Check-In Date</label>
+                <input type="date" id="check-in" name="check-in" required>
+            </div>
+            <div class="form-group">
+                <label for="check-out">Check-Out Date</label>
+                <input type="date" id="check-out" name="check-out" required>
+            </div>
+            <div class="form-group">
+                <label for="room-type">Room Type</label>
+                <select id="room-type" name="room-type" required>
+                    <option value="" disabled selected>Select Room Type</option>
+                    <option value="single">Single Room</option>
+                    <option value="double">Double Room</option>
+                    <option value="suite">Suite</option>
+                    <option value="deluxe">Deluxe Suite</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="guests">Number of Guests</label>
+                <input type="number" id="guests" name="guests" min="1" max="4" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <button type="submit" class="btn" onclick="handleBooking()">Book Now</button>
+        </div>
+    </section>
+</form>
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 WINAROSA. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function handleBooking() {
+            const checkIn = document.getElementById('check-in').value;
+            const checkOut = document.getElementById('check-out').value;
+            const roomType = document.getElementById('room-type').value;
+            const guests = document.getElementById('guests').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            if (checkIn && checkOut && roomType && guests && name && email) {
+                alert(`Booking successful!\n\nDetails:\nName: ${name}\nEmail: ${email}\nCheck-In: ${checkIn}\nCheck-Out: ${checkOut}\nRoom Type: ${roomType}\nGuests: ${guests}`);
+                // Here you would typically send the data to a server
+                // Example: fetch('/api/book', { method: 'POST', body: JSON.stringify({ checkIn, checkOut, roomType, guests, name, email }) });
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+    </script>
+</body>
+</html>
